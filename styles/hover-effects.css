@@ -1,0 +1,150 @@
+/* Button Hover Effects */
+.btn-hover-effect {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.btn-hover-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 0;
+}
+
+.btn-hover-effect:hover::before {
+  transform: translateX(0);
+}
+
+.btn-hover-effect:active {
+  transform: scale(0.98);
+}
+
+/* Link Hover Effects */
+.link-hover-effect {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.link-hover-effect::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.link-hover-effect:hover::after {
+  width: 100%;
+}
+
+/* Glow Effect for Primary Buttons */
+.btn-glow-effect {
+  transition: all 0.3s ease;
+}
+
+.btn-glow-effect:hover {
+  box-shadow: 0 0 15px rgba(79, 70, 229, 0.6);
+}
+
+/* Scale Effect for Card Links */
+.card-hover-effect {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Ripple Effect for Action Buttons */
+.btn-ripple-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-ripple-effect .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(0);
+  animation: ripple 0.6s linear;
+}
+
+@keyframes ripple {
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+/* Icon Rotation Effect */
+.icon-rotate-effect svg {
+  transition: transform 0.3s ease;
+}
+
+.icon-rotate-effect:hover svg {
+  transform: rotate(15deg);
+}
+
+/* Pulse Effect for Important Actions */
+.btn-pulse-effect {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(79, 70, 229, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(79, 70, 229, 0);
+  }
+}
+
+/* Text Underline Effect */
+.text-underline-effect {
+  position: relative;
+}
+
+.text-underline-effect::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.text-underline-effect:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Focus styles for accessibility */
+.btn-hover-effect:focus-visible,
+.link-hover-effect:focus-visible,
+.btn-glow-effect:focus-visible,
+.card-hover-effect:focus-visible,
+.btn-ripple-effect:focus-visible,
+.icon-rotate-effect:focus-visible,
+.btn-pulse-effect:focus-visible,
+.text-underline-effect:focus-visible {
+  outline: 2px solid rgba(79, 70, 229, 0.6);
+  outline-offset: 2px;
+}
