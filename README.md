@@ -1,30 +1,87 @@
 # Chrononomic Finance
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
-
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/ibrahimyssin-gmailcoms-projects/v0-image-analysis)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/W5vNMl6JIfR)
+A decentralized finance platform for time-based assets, built on Ethereum.
 
 ## Overview
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+Chrononomic Finance is a DeFi platform that allows users to tokenize time-based assets through the issuance and trading of time bonds. The platform uses the Chronon token as its native currency and provides various bond classes with different characteristics.
+
+## Quick Start
+
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- MetaMask or another Ethereum wallet
+
+### Installation
+
+1. Clone the repository:
+   \`\`\`bash
+   git clone https://github.com/your-username/chrononomic-finance.git
+   cd chrononomic-finance
+   \`\`\`
+
+2. Install dependencies:
+   \`\`\`bash
+   npm install
+   \`\`\`
+
+3. Set up environment variables:
+   \`\`\`bash
+   cp .env.example .env.local
+   \`\`\`
+   Edit `.env.local` with your configuration.
+
+4. Run the development server:
+   \`\`\`bash
+   npm run dev
+   \`\`\`
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Environment Variables
+
+See `.env.example` for all required environment variables.
+
+## Smart Contracts
+
+The platform consists of the following main contracts:
+
+- **ChrononToken**: ERC20 token that serves as the platform's native currency
+- **ChrononBond**: Manages the creation and redemption of time bonds
+- **ChrononVault**: Holds collateral for issued bonds
+- **ChrononomicFinance**: Main contract that coordinates the platform's functionality
 
 ## Deployment
 
-Your project is live at:
+### Testnet Deployment
 
-**[https://vercel.com/ibrahimyssin-gmailcoms-projects/v0-image-analysis](https://vercel.com/ibrahimyssin-gmailcoms-projects/v0-image-analysis)**
+For testnet deployment, see [SEPOLIA_DEPLOYMENT_GUIDE.md](./SEPOLIA_DEPLOYMENT_GUIDE.md).
 
-## Build your app
+### Mainnet Deployment
 
-Continue building your app on:
+For mainnet deployment, see [MAINNET_DEPLOYMENT_GUIDE.md](./MAINNET_DEPLOYMENT_GUIDE.md).
 
-**[https://v0.dev/chat/projects/W5vNMl6JIfR](https://v0.dev/chat/projects/W5vNMl6JIfR)**
+## Testing
 
-## How It Works
+Run the test suite:
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+\`\`\`bash
+npm test
+\`\`\`
+
+## Security
+
+For security considerations, see [SECURITY_CHECKLIST.md](./SECURITY_CHECKLIST.md).
+
+## Contributing
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
+\`\`\`
+
+Let's create a CONTRIBUTING.md file:
