@@ -38,6 +38,16 @@ const isBrowser = (): boolean => {
   return typeof window !== "undefined"
 }
 
+const PAYMENT_KEY = "chrononomic_payment_timestamp"
+const DAY_MS = 24 * 60 * 60 * 1000
+
+const isPaymentValid = (timestamp: string | null): boolean => {
+  if (!timestamp) return false
+  const t = parseInt(timestamp, 10)
+  if (Number.isNaN(t)) return false
+  return Date.now() - t < DAY_MS
+}
+
 // Provider component
 export function WalletProvider({ children }: { children: ReactNode }) {
   const [account, setAccount] = useState<string | null>(null)
@@ -69,11 +79,11 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     // Check provider after a short delay to ensure window is fully available
     setTimeout(checkProvider, 100)
 
-    // Check if payment has been made
+    // Check if payment has been made within the last 24 hours
     if (isBrowser()) {
       try {
-        const paymentStatus = localStorage.getItem("chrononomic_payment_complete")
-        if (paymentStatus === "true") {
+        const ts = localStorage.getItem(PAYMENT_KEY)
+        if (isPaymentValid(ts)) {
           setHasPaid(true)
         }
       } catch (err) {
@@ -85,6 +95,18 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     return () => {
       isMounted.current = false
     }
+  }, [])
+
+  // Periodically verify payment validity
+  useEffect(() => {
+    const id = setInterval(() => {
+      if (isBrowser()) {
+        const ts = localStorage.getItem(PAYMENT_KEY)
+        const valid = isPaymentValid(ts)
+        setHasPaid(valid)
+      }
+    }, 60 * 1000)
+    return () => clearInterval(id)
   }, [])
 
   // Check connection after provider is available
@@ -210,10 +232,10 @@ export function WalletProvider({ children }: { children: ReactNode }) {
     try {
       // Preview mode implementation
       if (inPreviewMode) {
-        await new Promise((resolve) => setTimeout(resolve, 2000)) // Simulate delay
+        await new Promise(resolve => setTimeout(resolve, 2000)) // Simulate delay
         setHasPaid(true)
         try {
-          localStorage.setItem("chrononomic_payment_complete", "true")
+          localStorage.setItem(PAYMENT_KEY, Date.now().toString())
         } catch (err) {
           console.error("Error saving payment status:", err)
         }
@@ -247,7 +269,7 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       if (txHash) {
         setHasPaid(true)
         try {
-          localStorage.setItem("chrononomic_payment_complete", "true")
+          localStorage.setItem(PAYMENT_KEY, Date.now().toString())
         } catch (err) {
           console.error("Error saving payment status:", err)
         }
