@@ -82,6 +82,29 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for contribution guidelines.
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
-\`\`\`
+```
 
-Let's create a CONTRIBUTING.md file:
+## Golden Gate Mint
+
+This feature mints `20 \u03c7` when a verified Golden Gate Bridge photo is captured inside San Francisco.
+
+### Setup
+
+1. Install dependencies and run tests:
+   ```bash
+   npm install
+   npm test
+   ```
+2. Configure environment variables:
+   ```bash
+   cp .env.example .env.local
+   ```
+   Set `API_BASE_URL`, `VISION_API_KEY`, `RELAY_PRIVATE_KEY`, `RPC_URL`, `PRINTER_ADDRESS`, and `TRAINING_BUCKET`.
+
+### Geofence
+
+See `src/services/GeofenceService.ts` for the San Francisco polygon.
+
+### Model Retraining
+
+Images cached via `cache-training-image` feed the ML pipeline. Replace `models/bridge-detector-v1.tflite` when deploying new models.
