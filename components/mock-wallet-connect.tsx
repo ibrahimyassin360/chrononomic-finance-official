@@ -15,10 +15,13 @@ export default function MockWalletConnect() {
   const [error, setError] = useState<string | null>(null)
   const ETH_REQUIRED = "1.0"
 
-  // Check if payment status is stored in localStorage
+  // Check if payment timestamp is valid (within 24 hours)
   const checkPaymentStatus = () => {
     try {
-      return localStorage.getItem("chrononomic_payment_complete") === "true"
+      const ts = localStorage.getItem("chrononomic_payment_timestamp")
+      if (!ts) return false
+      const last = parseInt(ts, 10)
+      return !Number.isNaN(last) && Date.now() - last < 24 * 60 * 60 * 1000
     } catch (e) {
       return false
     }
@@ -45,10 +48,10 @@ export default function MockWalletConnect() {
     // Simulate delay
     await new Promise((resolve) => setTimeout(resolve, 2000))
 
-    // Set payment status
+    // Set payment timestamp
     setHasPaid(true)
     try {
-      localStorage.setItem("chrononomic_payment_complete", "true")
+      localStorage.setItem("chrononomic_payment_timestamp", Date.now().toString())
     } catch (e) {
       console.error("Failed to save to localStorage:", e)
     }
@@ -59,7 +62,7 @@ export default function MockWalletConnect() {
   // Reset function for testing
   const resetPaymentStatus = () => {
     try {
-      localStorage.removeItem("chrononomic_payment_complete")
+      localStorage.removeItem("chrononomic_payment_timestamp")
     } catch (e) {
       console.error("Failed to remove from localStorage:", e)
     }
@@ -116,7 +119,7 @@ export default function MockWalletConnect() {
 
             <div className="p-4 bg-blue-50 rounded-md border border-blue-100">
               <p className="text-blue-800 mb-2">
-                To access Chrononomic Finance, a one-time payment of {ETH_REQUIRED} ETH is required.
+                To access Chrononomic Finance, a daily payment of {ETH_REQUIRED} ETH is required.
               </p>
               <Button onClick={payEth} disabled={isPaying} className="w-full">
                 {isPaying ? (
