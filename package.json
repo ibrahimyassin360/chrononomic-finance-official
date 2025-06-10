@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -50,6 +51,8 @@
     "dotenv": "latest",
     "embla-carousel-react": "8.5.1",
     "ethers": "latest",
+    "express": "latest",
+    "multer": "latest",
     "fs": "latest",
     "input-otp": "1.4.1",
     "jest": "latest",
