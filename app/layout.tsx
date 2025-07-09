@@ -4,7 +4,6 @@ import { Inter } from "next/font/google"
 import { ThemeProvider } from "@/components/theme-provider"
 import { SiteHeader } from "@/components/site-header"
 import { SiteFooter } from "@/components/site-footer"
-import WorkHoursReward from "@/components/work-hours-reward"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -28,7 +27,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="relative flex min-h-screen flex-col">
             <SiteHeader />
-            <WorkHoursReward />
             <main className="flex-1">{children}</main>
             <SiteFooter />
           </div>

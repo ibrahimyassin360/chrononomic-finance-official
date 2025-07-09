@@ -14,15 +14,12 @@ export default function PreviewWalletConnect() {
   const [error, setError] = useState<string | null>(null)
   const ETH_REQUIRED = "1.0"
 
-  // Check if user has already paid within the last 24 hours
+  // Check if user has already paid (from localStorage)
   useEffect(() => {
     try {
-      const ts = localStorage.getItem("chrononomic_payment_timestamp")
-      if (ts) {
-        const last = parseInt(ts, 10)
-        if (!Number.isNaN(last) && Date.now() - last < 24 * 60 * 60 * 1000) {
-          setHasPaid(true)
-        }
+      const paymentStatus = localStorage.getItem("chrononomic_payment_complete")
+      if (paymentStatus === "true") {
+        setHasPaid(true)
       }
     } catch (err) {
       console.error("Error checking payment status:", err)
@@ -55,9 +52,9 @@ export default function PreviewWalletConnect() {
       // Simulate delay
       await new Promise((resolve) => setTimeout(resolve, 2000))
 
-      // Save payment timestamp
+      // Save payment status
       try {
-        localStorage.setItem("chrononomic_payment_timestamp", Date.now().toString())
+        localStorage.setItem("chrononomic_payment_complete", "true")
       } catch (err) {
         console.error("Error saving payment status:", err)
       }
@@ -74,7 +71,7 @@ export default function PreviewWalletConnect() {
   // Reset payment status (for testing)
   const resetPaymentStatus = () => {
     try {
-      localStorage.removeItem("chrononomic_payment_timestamp")
+      localStorage.removeItem("chrononomic_payment_complete")
       setHasPaid(false)
     } catch (err) {
       console.error("Error resetting payment status:", err)
@@ -133,7 +130,7 @@ export default function PreviewWalletConnect() {
 
             <div className="p-4 bg-blue-50 rounded-md border border-blue-100">
               <p className="text-blue-800 mb-2">
-                To access Chrononomic Finance, a daily payment of {ETH_REQUIRED} ETH is required.
+                To access Chrononomic Finance, a one-time payment of {ETH_REQUIRED} ETH is required.
               </p>
               <Button onClick={makePayment} disabled={isPaying} className="w-full">
                 {isPaying ? (

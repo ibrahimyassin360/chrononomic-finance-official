@@ -1,7 +1,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { ArrowRight, Clock, Coins, BarChart3, Wallet, ArrowRightLeft, Shield, Globe, Zap } from "lucide-react"
-import { HomepageChatbot } from "@/components/homepage/chatbot"
 
 export default function HomePage() {
   return (
@@ -239,9 +238,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        {/* Chatbot */}
-        <HomepageChatbot />
       </main>
     </div>
   )

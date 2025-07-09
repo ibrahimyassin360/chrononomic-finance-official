@@ -98,7 +98,7 @@ export default function EthWalletConnect() {
             ) : (
               <div className="p-4 bg-blue-50 rounded-md border border-blue-100">
                 <p className="text-blue-800 mb-2">
-                  To access Chrononomic Finance, a daily payment of {ETH_REQUIRED} ETH is required.
+                  To access Chrononomic Finance, a one-time payment of {ETH_REQUIRED} ETH is required.
                 </p>
                 <Button onClick={handlePayment} disabled={isPaying} className="w-full">
                   {isPaying ? (
